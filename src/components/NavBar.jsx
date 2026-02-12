@@ -45,7 +45,7 @@ const NavBar = () => {
           ))}
           <a
             href="#cta"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-red-600 via-red-500 to-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-red-700/30 transition hover:-translate-y-0.5 hover:shadow-red-600/40"
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 border border-red-400 hover:border-blue-400 transition-all "
           >
             <Sparkles className="h-4 w-4" />
             Register
@@ -84,7 +84,7 @@ const NavBar = () => {
               <a
                 href="#cta"
                 onClick={() => setOpen(false)}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-600 via-red-500 to-blue-500 px-3 py-2 text-white shadow-lg shadow-red-700/30"
+                className="inline-flex items-center justify-center gap-2 rounded-xl "
               >
                 <Sparkles className="h-4 w-4" />
                 Register

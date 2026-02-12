@@ -101,36 +101,6 @@ const HeroSection = () => {
             Sequence ID: CP-2026-ALPHA • 24H • On-Campus + Hybrid
           </motion.div>
 
-          <motion.div
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.42 }}
-            className="relative mt-4 max-w-3xl rounded-2xl border border-white/10 bg-slate-900/70 p-5 text-left shadow-[0_22px_60px_-30px_rgba(0,0,0,0.6)]"
-          >
-            <div className="flex items-center gap-3 text-red-200">
-              <Quote className="h-5 w-5" />
-              <p className="text-xs font-semibold uppercase tracking-[0.25em]">Spider-Man Code</p>
-            </div>
-            <p className="mt-3 text-lg font-semibold text-white">
-              "With great power comes great responsibility." With great code comes great shipping—keep your tests tight and your swing smoother than a webline.
-            </p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-white/10 bg-white/5 p-3 shadow-inner shadow-slate-900/50">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-red-200">Date</p>
-                <p className="text-lg font-semibold text-white">March 15 • 24 hours</p>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-3 shadow-inner shadow-slate-900/50">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-red-200">Venue</p>
-                <p className="text-lg font-semibold text-white">Tech Arena, Campus Hub</p>
-              </div>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-red-200">
-              <span className="rounded-full bg-red-600/20 px-3 py-1">AI & Web</span>
-              <span className="rounded-full bg-blue-500/20 px-3 py-1">AR/VR</span>
-              <span className="rounded-full bg-slate-800 px-3 py-1">Cyber-Defense</span>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
