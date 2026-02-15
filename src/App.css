@@ -1,1 +1,24 @@
 
+
+@keyframes hero-marquee {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.logo-track {
+	min-width: 220%;
+	animation: hero-marquee 18s linear infinite;
+}
+
+.tilted-marquee {
+	transform: rotate(-4deg);
+}
+
+.tilted-marquee:hover .logo-track {
+	animation-duration: 12s;
+}
+
