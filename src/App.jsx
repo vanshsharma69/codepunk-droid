@@ -5,6 +5,9 @@ import HeroSection from './components/HeroSection'
 import Footer from './components/Footer'
 import falldown from './assets/falldown.png'
 import droidIntro from './assets/droid_intro.mp4'
+import TimeCounter from "./components/TimeCounter";
+import PrizePool from "./components/PrizePool";
+import Timeline from "./components/Timeline";
 
 function App() {
   const [showIntro, setShowIntro] = useState(true)
@@ -41,9 +44,12 @@ function App() {
       <div className=' top-[-32px] left-[-42px] fixed '>
         <img src={falldown} alt="Falldown" className="w-[250px] h-[340px]" />
       </div>
-      <div className={`relative z-10 mx-auto max-w-7xl px-5 pb-20 sm:px-6 lg:px-10 xl:max-w-[1400px] transition-opacity duration-700 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
+      <div>
         <NavBar />
         <HeroSection />
+        <TimeCounter />
+        <PrizePool/>
+        <Timeline/>
         <Footer />
       </div>
     </div>
