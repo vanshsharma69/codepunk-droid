@@ -1,0 +1,142 @@
+.keypad {
+  position: relative;
+  aspect-ratio: 400 / 310;
+  /* width: clamp(280px, 35vw, 400px); */
+    width: clamp(220px, 25vw, 300px);
+
+  display: flex;
+  place-items: center;
+  transform-style: preserve-3d;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0;
+}
+
+/* BASE */
+.keypad__base {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+/* KEY */
+.key {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  transform-style: preserve-3d;
+}
+
+.key__mask {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.key__content {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  transition: translate 0.12s ease-out;
+  container-type: inline-size;
+}
+
+.key[data-pressed='true'] .key__content,
+.key:active .key__content {
+  translate: 0 calc(var(--travel) * 1%);
+}
+
+/* TEXT */
+.key__text {
+  position: absolute;
+  top: 5%;
+  left: 0;
+  width: 86%;
+  height: 46%;
+  font-size: 12cqi;
+  z-index: 2;
+  color: hsl(0 0% 94%);
+  padding: 1ch;
+  translate: 8% 10%;
+  transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg);
+}
+
+/* SINGLE KEYS */
+.keypad__single {
+  width: 40.5%;
+  height: 46%;
+  left: 54%;
+  bottom: 36%;
+  clip-path: polygon(
+    0 0,
+    54% 0,
+    89% 24%,
+    100% 70%,
+    54% 100%,
+    46% 100%,
+    0 69%,
+    12% 23%,
+    47% 0%
+  );
+  mask: url(https://assets.codepen.io/605876/keypad-single.png) 50% 50% / 100% 100%;
+  -webkit-mask: url(https://assets.codepen.io/605876/keypad-single.png) 50% 50% / 100% 100%;
+}
+
+.keypad__single--left {
+  left: 29.3%;
+  bottom: 54.2%;
+}
+
+.keypad__single .key__text {
+  width: 52%;
+  height: 62%;
+  translate: 45% -16%;
+  font-size: 18cqi;
+}
+
+/* DOUBLE KEY */
+.keypad__double {
+  width: 64%;
+  height: 65%;
+  left: 6%;
+  bottom: 17.85%;
+  clip-path: polygon(
+    34% 0,
+    93% 44%,
+    101% 78%,
+    71% 100%,
+    66% 100%,
+    0 52%,
+    0 44%,
+    7% 17%,
+    30% 0
+  );
+  mask: url(https://assets.codepen.io/605876/keypad-double.png) 50% 50% / 100% 100%;
+  -webkit-mask: url(https://assets.codepen.io/605876/keypad-double.png) 50% 50% / 100% 100%;
+}
+
+/* IMAGES + COLOR FILTER */
+.key img {
+  width: 100%;
+  transition: translate 0.12s ease-out;
+  filter:
+    hue-rotate(calc(var(--hue) * 1deg))
+    saturate(var(--saturate))
+    brightness(var(--brightness));
+}
+
+
+.contact-row {
+  display: flex;
+  align-items: center;           /* vertical alignment */
+  gap: 3rem;                     /* spacing between input & keypad */
+  width: 100%;
+  max-width: 80rem;
+  margin-top: 1.5rem;
+}
+
+.keypad span {
+  color: white;
+}

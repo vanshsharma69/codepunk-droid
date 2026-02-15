@@ -1,108 +1,175 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { gsap } from 'gsap'
-import { Sparkles, Rocket, Quote } from 'lucide-react'
+import { useRef } from "react"
+import { motion } from "framer-motion"
+import { Sparkles, Rocket } from "lucide-react"
+import spiderman from "../assets/spiderman-center.png"
 
-const heroText = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+const container = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+}
+
+const fadeRight = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+}
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
 }
 
 const HeroSection = () => {
-  const pulseRef = useRef(null)
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (pulseRef.current) {
-        gsap.to(pulseRef.current, {
-          opacity: 0.5,
-          scale: 1.04,
-          duration: 3,
-          repeat: -1,
-          yoyo: true,
-          ease: 'sine.inOut',
-        })
-      }
-    })
-    return () => ctx.revert()
-  }, [])
+  const spiderRef = useRef(null)
 
   return (
-    <section id="hero" className="relative pt-8 md:pt-12">
-      <div className="relative overflow-hidden px-6 py-16 text-center grid-scan">
-        <div
-          ref={pulseRef}
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,64,64,0.22),transparent_44%),radial-gradient(circle_at_78%_30%,rgba(59,130,246,0.16),transparent_36%)]"
-          aria-hidden
-        />
+    <section className="relative min-h-screen bg-black overflow-hidden text-white flex items-center justify-center">
 
-        <div className="relative mx-auto flex max-w-4xl flex-col items-center gap-6">
-          <motion.p
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.35em] text-red-200"
+      {/* Background Glow */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(255,0,0,0.25), transparent 40%)",
+        }}
+      />
+
+      {/* MAIN GRID */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        className="relative w-full max-w-7xl mx-auto px-8 grid lg:grid-cols-3 items-center"
+      >
+
+        {/* LEFT CONTENT */}
+        <motion.div
+          variants={fadeRight}
+          className="z-20 space-y-6"
+        >
+          <motion.h3
+            variants={fadeUp}
+            className="text-red-500 tracking-[0.3em] uppercase text-sm"
           >
-            <span className="text-red-400">[</span>
-            Protocol: CodePunk_2.0_Initiated
-            <span className="text-red-400">]</span>
-          </motion.p>
+            Ultimate Experience
+          </motion.h3>
 
           <motion.h1
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.1 }}
-            className="text-5xl font-black uppercase leading-[0.95] tracking-[0.08em] text-white drop-shadow-[0_12px_32px_rgba(255,32,32,0.45)] sm:text-6xl lg:text-7xl"
+            variants={fadeUp}
+            className="text-5xl font-black uppercase leading-[0.9]"
           >
-            CodePunk 2.0
+            CodePunk
+            <span className="block text-red-600">2.0</span>
           </motion.h1>
 
           <motion.p
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.18 }}
-            className="max-w-3xl text-lg text-slate-200 sm:text-xl"
+            variants={fadeUp}
+            className="text-gray-300 max-w-sm"
           >
-            Where deep thinking meets bold innovation. Breach the boundary between reality and algorithm—Spider-Verse style.
+            Where deep thinking meets bold innovation.
+            Break the algorithm. Bend reality.
           </motion.p>
 
           <motion.div
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.26 }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            variants={fadeUp}
+            className="flex gap-4"
           >
-            <a
-              href="#cta"
-              className="inline-flex items-center gap-2 rounded-full border border-red-400/60 bg-red-600 px-7 py-3 text-base font-semibold uppercase tracking-[0.08em] text-white shadow-[0_15px_45px_-18px_rgba(255,59,59,0.85)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_55px_-15px_rgba(255,59,59,0.95)]"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-red-600 hover:bg-red-700 transition px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-red-600/40"
             >
-              <Sparkles className="h-5 w-5" />
-              Initialize Sequence
-            </a>
-            <a
-              href="#roadmap"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3 text-base font-semibold uppercase tracking-[0.08em] text-slate-100 transition hover:border-red-400 hover:text-red-200"
-            >
-              <Rocket className="h-5 w-5" />
-              View Timeline
-            </a>
-          </motion.div>
+              <Sparkles size={18} />
+              Enter
+            </motion.button>
 
-          <motion.div
-            variants={heroText}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.34 }}
-            className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-xs font-semibold uppercase tracking-[0.3em] text-red-200"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border border-red-500 px-6 py-3 rounded-full hover:bg-red-600/20 transition flex items-center gap-2"
+            >
+              <Rocket size={18} />
+              Timeline
+            </motion.button>
+          </motion.div>
+        </motion.div>
+
+        {/* CENTER SPIDER IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+          className="relative flex justify-center items-center z-30"
+        >
+          <motion.img
+            ref={spiderRef}
+            src={spiderman}
+            alt="Spider-Man"
+            className="relative h-[540px] w-[420px]"
+            style={{ zIndex: 50 }}
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+
+        {/* RIGHT CONTENT */}
+        <motion.div
+          variants={fadeLeft}
+          className="z-20 text-right space-y-6"
+        >
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-400 uppercase tracking-widest text-sm"
           >
-            Sequence ID: CP-2026-ALPHA • 24H • On-Campus + Hybrid
-          </motion.div>
+            Protocol: CodePunk_2.0
+          </motion.p>
 
-        </div>
-      </div>
+          <motion.p
+            variants={fadeUp}
+            className="text-gray-300 max-w-sm ml-auto"
+          >
+            Enter the Spider-Tech era.
+            A cinematic hackathon experience powered by bold ideas.
+          </motion.p>
+
+          <motion.p
+            variants={fadeUp}
+            className="text-red-500 font-semibold"
+          >
+            24H • On-Campus + Hybrid
+          </motion.p>
+        </motion.div>
+
+      </motion.div>
     </section>
   )
 }

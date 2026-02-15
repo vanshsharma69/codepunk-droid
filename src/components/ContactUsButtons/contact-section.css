@@ -1,0 +1,104 @@
+.contact-me-section {
+  margin: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-me-section .heading {
+  max-width: 50%;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.contact-me-section span {
+  color: var(--primary);
+}
+
+/* ROW */
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 80rem;
+  margin-top: 1.5rem;
+}
+
+/* EMAIL */
+.email-container {
+  flex: 1;
+  border-radius: 10rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid white
+}
+
+.email-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ICON */
+.round-icon {
+  height: 3.2rem;
+  width: 3.2rem;
+  background: url('../../assets/svgs/mail-icon.svg') center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+/* INPUT */
+.text-field {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.text-field input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  padding: 0.9rem 0;
+  background: transparent;
+}
+
+.text-field input::placeholder {
+  color: var(--black);
+}
+
+/* BUTTON */
+.send-button {
+  margin-left: 1rem;
+  padding: 0.8rem 2.2rem;
+  border-radius: 4rem;
+  background-color: red;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.send-button p {
+  color: var(--white);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+/* BANNER */
+.mail-banner {
+  margin-top: 0.5rem;
+  max-width: 80rem;
+  width: 100%;
+  padding: 1rem;
+  background: url('../../assets/svgs/mail-banner.svg') center / contain no-repeat;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-row {
+    flex-direction: column;
+  }
+
+  .contact-me-section .heading {
+    max-width: 100%;
+  }
+}
