@@ -1,59 +1,71 @@
 import React, { useMemo, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import pig from "../assets/pig.svg";
 import light from "../assets/light.avif";
 import prizepoolImage from "../assets/prizepool.svg";
 
 const PrizePool = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, margin: "-50px" });
 
-  /* 🔥 Dense Fireflies */
+  /* Minimal particles */
   const particles = useMemo(() =>
-    Array.from({ length: 120 }).map(() => ({
+    Array.from({ length: 20 }).map(() => ({
       left: Math.random() * 100,
       top: Math.random() * 100,
-      delay: Math.random() * 25,
-      duration: 20 + Math.random() * 30,
-      size: 2 + Math.random() * 4,
-      color: Math.random() > 0.5 ? "yellow" : "white",
+      delay: Math.random() * 5,
+      duration: 10 + Math.random() * 10,
+      size: 2 + Math.random() * 2,
     }))
   , []);
 
   const prizes = [
     {
+      id: 1,
       label: "1st Prize",
       amount: "RS.125K+",
-      desc: "Grand champion award with premium goodies, cash prize and internship opportunities."
+      desc: "Grand champion award with premium goodies, cash prize and internship opportunities.",
+      color: "#FFD700",
     },
     {
+      id: 2,
       label: "2nd Prize",
       amount: "RS.75K+",
-      desc: "Outstanding innovation award with sponsor rewards and industry mentorship."
+      desc: "Outstanding innovation award with sponsor rewards and industry mentorship.",
+      color: "#C0C0C0",
     },
     {
+      id: 3,
       label: "3rd Prize",
       amount: "RS.50K+",
-      desc: "Creative excellence prize with project funding and exclusive merchandise."
+      desc: "Creative excellence prize with project funding and exclusive merchandise.",
+      color: "#CD7F32",
     },
     {
-      label: "Ingenuous Spark",
+      id: 4,
+      label: "4th Spark",
       amount: "RS.25K+",
-      desc: "Recognition for disruptive ideas with incubation and sponsor support."
+      desc: "Recognition for disruptive ideas with incubation and sponsor support.",
+      color: "#FF3366",
     },
     {
+      id: 5,
       label: "Visionary Spark",
       amount: "RS.15K+",
-      desc: "Award for visionary thinkers with startup exposure and networking access."
+      desc: "Award for visionary thinkers with startup exposure and networking access.",
+      color: "#9D4EDD",
     }
   ];
 
   return (
-    <section id="highlights" className="relative w-full bg-[#070707] pt-60 overflow-hidden">
-
-      {/* Fireflies */}
+    <section ref={sectionRef} className="relative w-full bg-black overflow-hidden">
+      
+      {/* Minimal particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {particles.map((p, i) => (
           <span
             key={i}
-            className={`firefly ${p.color}`}
+            className="particle"
             style={{
               left: `${p.left}%`,
               top: `${p.top}%`,
@@ -66,42 +78,55 @@ const PrizePool = () => {
         ))}
       </div>
 
-      <div className="relative z-10">
-
-        {/* 🏆 90% WIDTH HEADING */}
-        <div className="flex justify-center mb-24">
-          <div
-            className="w-[90%] text-center py-6
-                       text-5xl md:text-7xl lg:text-8xl
-                       font-extrabold text-white border-2 border-white"
+      <div className="relative z-10 py-16">
+        {/* HEADING - Tracks Style */}
+        <motion.div 
+          className="text-center mb-16 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white"
             style={{
-              backgroundColor: "#E00302",
-              boxShadow: "8px 8px 0px #9E0782",
+              textShadow: `
+                4px 4px 0px #FF3366,
+                8px 8px 0px #00D9FF,
+                12px 12px 0px #9D4EDD
+              `,
+              WebkitTextStroke: '2px #000'
             }}
           >
-            PRIZE POOL : RS 12 LACS+
-          </div>
-        </div>
+            PRIZE POOL
+          </h2>
+          <p 
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-white mt-4"
+            style={{
+              textShadow: '3px 3px 0px #000',
+              WebkitTextStroke: '1px #000'
+            }}
+          >
+            RS 12 LACS+
+          </p>
+        </motion.div>
 
-        {/* Reverse Triangle Layout */}
-        <div className="max-w-7xl mx-auto px-6 pb-24">
-
+        {/* Cards Grid */}
+        <div className="max-w-7xl mx-auto px-6 pb-8">
           {/* Top Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
             {prizes.slice(0, 3).map((prize, index) => (
-              <PrizeCard key={index} prize={prize} />
+              <PrizeCard key={prize.id} prize={prize} index={index} isInView={isInView} />
             ))}
           </div>
 
           {/* Bottom Row */}
-          <div className="flex justify-center gap-16 flex-wrap">
+          <div className="flex justify-center gap-10 flex-wrap">
             {prizes.slice(3).map((prize, index) => (
-              <div key={index} className="w-full sm:w-[45%] lg:w-[30%]">
-                <PrizeCard prize={prize} />
+              <div key={prize.id} className="w-full sm:w-[45%] lg:w-[30%]">
+                <PrizeCard prize={prize} index={index + 3} isInView={isInView} />
               </div>
             ))}
           </div>
-
         </div>
       </div>
 
@@ -110,126 +135,126 @@ const PrizePool = () => {
         <img
           src={prizepoolImage}
           alt="Prize Pool Bottom"
-          className="w-screen max-w-none object-cover block"
+          className="w-full max-w-none object-cover block"
         />
       </div>
 
+      {/* CSS for minimal particles */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0); 
+            opacity: 0; 
+          }
+          10% { opacity: 0.6; }
+          90% { opacity: 0.6; }
+          100% { 
+            transform: translateY(-100vh); 
+            opacity: 0; 
+          }
+        }
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, #fff 0%, transparent 70%);
+          box-shadow: 0 0 6px #fff;
+          animation: float linear infinite;
+        }
+      `}</style>
     </section>
   );
 };
 
-/* 🎯 Prize Card Component with Holographic Effect */
-const PrizeCard = ({ prize }) => {
-
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = (y - centerY) / 18;
-    const rotateY = (centerX - x) / 18;
-
-    card.style.transform =
-      `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  };
-
-  const handleMouseLeave = () => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transform =
-      "perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)";
-  };
-
+/* Prize Card with White Border and Visible Description */
+const PrizeCard = ({ prize, index, isInView }) => {
   return (
-    <div className="relative">
-
+    <motion.div 
+      className="relative"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+    >
       {/* Label */}
-      <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20">
-        <div
-          className="px-6 py-2 text-white font-bold border-2 border-white"
-          style={{
-            backgroundColor: "#E00302",
-            boxShadow: "4px 4px 0px #9E0782",
-          }}
-        >
-          {prize.label}
-        </div>
-      </div>
-
-      {/* Card */}
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative rounded-3xl overflow-hidden
-                   border-[6px] border-[#4B1C86]
-                   shadow-[0_15px_0px_#2B0F54]
-                   transition-transform duration-300 transform-gpu"
+      <div 
+        className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-5 py-2 text-black font-bold text-sm border-2 border-white"
         style={{
-          background:
-            "linear-gradient(to bottom, #9E0782 0%, #5A0F9C 60%, #3B0F70 100%)",
+          backgroundColor: prize.color,
+          boxShadow: "4px 4px 0px #000",
         }}
       >
+        {prize.label}
+      </div>
 
-        {/* Holographic Shine */}
-        <div
-          className="absolute inset-0 pointer-events-none rounded-3xl"
+      {/* Main Card */}
+      <div
+        className="relative rounded-2xl overflow-hidden border-4 border-white"
+        style={{
+          background: "linear-gradient(to bottom, #dc2626 0%, #991b1b 50%, #7f1d1d 100%)",
+          boxShadow: "8px 8px 0px rgba(0,0,0,0.5)",
+        }}
+      >
+        {/* Tracks-style diagonal line texture */}
+        <div 
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
-            background: `radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.35), transparent 40%)`,
-            mixBlendMode: "overlay",
+            backgroundImage: `
+              linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.2) 60%, transparent 60%),
+              linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.2) 40%, rgba(255,255,255,0.2) 60%, transparent 60%)
+            `,
+            backgroundSize: '20px 20px'
           }}
         />
 
-        {/* Amount */}
-        <div
-          className="text-center text-5xl md:text-6xl font-extrabold
-                     mt-10 mb-8 text-white relative z-10"
-          style={{
-            WebkitTextStroke: "3px #070707",
-            textShadow: "4px 4px 0px #070707",
-          }}
-        >
-          {prize.amount}
-        </div>
+        {/* Content */}
+        <div className="relative z-10">
+          {/* Amount */}
+          <div
+            className="text-center text-4xl sm:text-5xl font-extrabold mt-8 mb-6 text-white"
+            style={{
+              WebkitTextStroke: "2px #000",
+              textShadow: "4px 4px 0px #000",
+            }}
+          >
+            {prize.amount}
+          </div>
 
-        {/* Rotating Light + Pig */}
-        <div className="relative flex justify-center items-center h-48 mb-8">
-          <img
-            src={light}
-            alt="Light"
-            className="absolute w-48 md:w-56 animate-spin-slow opacity-80"
-          />
-          <img
-            src={pig}
-            alt="Prize"
-            className="relative w-28 md:w-36 z-10"
-          />
-        </div>
+          {/* Light + Pig */}
+          <div className="relative flex justify-center items-center h-40 mb-6">
+            <img
+              src={light}
+              alt="Light"
+              className="absolute w-40 sm:w-48 animate-spin-slow opacity-90"
+            />
+            <img
+              src={pig}
+              alt="Prize"
+              className="relative w-24 sm:w-28 z-10 drop-shadow-lg"
+            />
+          </div>
 
-        {/* Description */}
-        <div
-          className="py-6 px-6 text-center text-white font-bold text-sm md:text-base relative z-10"
-          style={{
-            background:
-              "linear-gradient(to bottom, #7C1CCF, #4B1C86)",
-          }}
-        >
-          {prize.desc}
+          {/* Description - Purple background for visibility */}
+          <div
+            className="py-5 px-5 text-center text-white font-bold text-sm border-t-4 border-white"
+            style={{
+              background: "linear-gradient(to bottom, #4B1C86, #2B0F54)",
+            }}
+          >
+            {prize.desc}
+          </div>
         </div>
-
       </div>
-    </div>
+
+      {/* CSS for slow spin */}
+      <style>{`
+        .animate-spin-slow {
+          animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </motion.div>
   );
 };
 

@@ -1,15 +1,19 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import timelineImage from "../assets/counter-image.svg";
 
 const TimeCounter = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, margin: "-50px" });
 
-  /* Stable particles (no jitter) */
+  /* Minimal particles */
   const particles = useMemo(() =>
-    Array.from({ length: 45 }).map(() => ({
+    Array.from({ length: 10 }).map(() => ({
       left: Math.random() * 100,
-      top: Math.random() * 100 + 10,
-      delay: Math.random() * 15,
-      duration: 12 + Math.random() * 12,
+      top: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: 10 + Math.random() * 10,
+      size: 2 + Math.random() * 2,
     }))
   , []);
 
@@ -38,18 +42,32 @@ const TimeCounter = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <section id="stats" className="relative w-full bg-black text-white overflow-hidden pb-40 border-t-2 border-white z-10">
+  const timeUnits = [
+    { label: "DAYS", value: timeLeft?.days || 0 },
+    { label: "HOURS", value: timeLeft?.hours || 0 },
+    { label: "MINUTES", value: timeLeft?.minutes || 0 },
+    { label: "SECONDS", value: timeLeft?.seconds || 0 },
+  ];
 
-      {/* ✨ FIRE FLY PARTICLES */}
+  return (
+    <section 
+      ref={sectionRef} 
+      className="relative w-full bg-black text-white overflow-hidden z-10"
+    >
+      {/* Top Divider Only */}
+      <div className="w-full h-1 bg-gradient-to-r from-red-600 via-purple-500 to-cyan-500" />
+
+      {/* Minimal particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {particles.map((p, i) => (
           <span
             key={i}
-            className="firefly"
+            className="particle"
             style={{
               left: `${p.left}%`,
               top: `${p.top}%`,
+              width: `${p.size}px`,
+              height: `${p.size}px`,
               animationDelay: `${p.delay}s`,
               animationDuration: `${p.duration}s`,
             }}
@@ -57,78 +75,117 @@ const TimeCounter = () => {
         ))}
       </div>
 
-      {/* IMAGE */}
-      <div className="relative w-full z-10">
+      {/* FULL WIDTH IMAGE - No border, no outline */}
+      <motion.div 
+        className="relative w-full"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <img
           src={timelineImage}
           alt="Time Counter Banner"
-          className="w-full h-[280px] sm:h-[350px] md:h-[450px] lg:h-[520px] object-cover block border-0 outline-none"
+          className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] object-cover block"
         />
+      </motion.div>
 
-        {/* OVERLAP CONTAINER */}
-        <div
-          className="absolute left-1/2 bottom-0 translate-y-1/2 -translate-x-1/2
-                     w-[90%] sm:w-[75%] md:w-[60%]
-                     flex flex-col items-center gap-4"
+      {/* CONTENT SECTION */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 py-12 sm:py-16 md:py-20">
+        
+        {/* HEADING */}
+        <motion.div
+          className="text-center mb-8 sm:mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-
-          {/* TITLE BOX */}
-          <div
-            className="w-[70%] sm:w-[55%] md:w-[45%]
-                       py-2
-                       text-center text-black
-                       font-semibold
-                       text-base sm:text-lg
-                       border border-black"
+          <h2 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white"
             style={{
-              backgroundColor: "#F5C542",
-              backgroundImage:
-                "radial-gradient(#000 1.2px, transparent 1.2px)",
-              backgroundSize: "14px 14px",
-              boxShadow: `
-                4px 4px 0px #E0B437,
-                8px 8px 0px #C99E2F
+              textShadow: `
+                3px 3px 0px #FF3366,
+                6px 6px 0px #00D9FF
               `,
+              WebkitTextStroke: '2px #000'
             }}
           >
             HACK STARTS IN
-          </div>
+          </h2>
+        </motion.div>
 
-          {/* TIMER BOX */}
+        {/* TIMER - Red Dotted Background */}
+        <motion.div
+          className="relative w-full max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          {/* Timer Box with Red Dotted Background */}
           <div
-            className="w-full
-                       py-5 sm:py-6 md:py-7
-                       text-center text-black
-                       font-extrabold
-                       text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-                       border border-black
-                       tracking-[0.08em]"
+            className="py-6 sm:py-8 md:py-10 px-4 rounded-xl border-4 border-black"
             style={{
-              backgroundColor: "#F5C542",
-              backgroundImage:
-                "radial-gradient(#000 1.5px, transparent 1.5px)",
+              backgroundColor: "#dc2626",
+              backgroundImage: "radial-gradient(#000 1.5px, transparent 1.5px)",
               backgroundSize: "14px 14px",
-              boxShadow: `
-                6px 6px 0px #E0B437,
-                12px 12px 0px #C99E2F
-              `,
+              boxShadow: "6px 6px 0px #000",
             }}
           >
-            {timeLeft ? (
-              <>
-                {String(timeLeft.days).padStart(2, "0")} :
-                {String(timeLeft.hours).padStart(2, "0")} :
-                {String(timeLeft.minutes).padStart(2, "0")} :
-                {String(timeLeft.seconds).padStart(2, "0")}
-              </>
-            ) : (
-              "00 : 00 : 00 : 00"
-            )}
+            {/* Timer Content */}
+            <div className="flex justify-center items-center gap-2 sm:gap-4 md:gap-6">
+              {timeUnits.map((unit, index) => (
+                <React.Fragment key={unit.label}>
+                  <div className="flex flex-col items-center min-w-[50px] sm:min-w-[70px] md:min-w-[90px]">
+                    <div 
+                      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white"
+                      style={{
+                        textShadow: "3px 3px 0px #000",
+                        WebkitTextStroke: '2px #000'
+                      }}
+                    >
+                      {String(unit.value).padStart(2, "0")}
+                    </div>
+                    <span className="text-[10px] sm:text-xs md:text-sm font-bold text-white mt-2 tracking-widest uppercase">
+                      {unit.label}
+                    </span>
+                  </div>
+                  
+                  {index < 3 && (
+                    <span 
+                      className="text-2xl sm:text-3xl md:text-4xl font-black text-white"
+                      style={{ textShadow: '2px 2px 0px #000' }}
+                    >
+                      :
+                    </span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
 
+      {/* CSS for minimal particles */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0); 
+            opacity: 0; 
+          }
+          10% { opacity: 0.5; }
+          90% { opacity: 0.5; }
+          100% { 
+            transform: translateY(-100vh); 
+            opacity: 0; 
+          }
+        }
+        .particle {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(circle, #fff 0%, transparent 70%);
+          box-shadow: 0 0 4px #fff;
+          animation: float linear infinite;
+        }
+      `}</style>
     </section>
   );
 };

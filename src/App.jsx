@@ -156,9 +156,7 @@ function App() {
         <FAQSection />
         <ContactSection />
 
-        <h1 className="font-slackey text-5xl mx-auto text-center mt-20">
-          Hackathon 2026
-        </h1>
+        
 
         <Footer />
       </div>
