@@ -132,11 +132,11 @@ const HeroSection = ({ onNav }) => {
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
           className="relative flex items-center justify-center z-10 md:z-20"
         >
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center ">
             <img
               src={codepunkLogo}
               alt="CodePunk 2.0"
-              className="absolute -top-10 sm:-top-14 md:-top-[136px] w-[320px] sm:w-[420px] md:w-[560px] lg:w-[720px] max-w-[88vw] drop-shadow-[0_12px_35px_rgba(255,0,0,0.35)] pointer-events-none select-none z-0"
+              className="absolute -top-5 sm:-top-14 md:-top-[136px] w-[320px] sm:w-[420px] md:w-[560px] lg:w-[720px] max-w-[88vw] drop-shadow-[0_12px_35px_rgba(255,0,0,0.35)] pointer-events-none select-none z-0"
             />
 
             <img
