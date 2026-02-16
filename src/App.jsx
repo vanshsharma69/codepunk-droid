@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import Lenis from "@studio-freight/lenis"
 import "./App.css"
 
@@ -20,6 +20,23 @@ function App() {
   const [showIntro, setShowIntro] = useState(true)
   const [, setSkipReady] = useState(false)
   const lenisRef = useRef(null)
+
+  const scrollToId = useCallback((hash) => {
+    if (!hash || !lenisRef.current) return
+
+    const target =
+      typeof hash === "string" && hash.startsWith("#")
+        ? document.querySelector(hash)
+        : null
+
+    if (!target) return
+
+    lenisRef.current.scrollTo(target, {
+      offset: -80,
+      duration: 1.1,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    })
+  }, [])
 
   /* =============================
      PREMIUM LENIS SMOOTH SCROLL
@@ -47,6 +64,29 @@ function App() {
     return () => {
       lenis.destroy()
     }
+  }, [])
+
+  /* =============================
+     GLOBAL HASH SMOOTH SCROLL
+  ============================== */
+  useEffect(() => {
+    const onAnchorClick = (e) => {
+      const anchor = e.target.closest('a[href^="#"]')
+      if (!anchor) return
+      const hash = anchor.getAttribute("href")
+      if (!hash) return
+      const target = document.querySelector(hash)
+      if (!target || !lenisRef.current) return
+      e.preventDefault()
+      lenisRef.current.scrollTo(target, {
+        offset: -80,
+        duration: 1.1,
+        easing: (t) => 1 - Math.pow(1 - t, 3),
+      })
+    }
+
+    document.addEventListener("click", onAnchorClick)
+    return () => document.removeEventListener("click", onAnchorClick)
   }, [])
 
   /* =============================
@@ -105,8 +145,8 @@ function App() {
           showIntro ? "opacity-0" : "opacity-100"
         }`}
       >
-        <NavBar />
-        <HeroSection />
+        <NavBar onNav={scrollToId} />
+        <HeroSection onNav={scrollToId} />
         <LogoMoving image={spiderlogo} speed={25} size={120} />
         <TimeCounter />
         <Prizepool />
@@ -116,9 +156,7 @@ function App() {
         <FAQSection />
         <ContactSection />
 
-        <h1 className="font-slackey text-5xl mx-auto text-center mt-20">
-          Hackathon 2026
-        </h1>
+        
 
         <Footer />
       </div>

@@ -8,12 +8,11 @@ const TimeCounter = () => {
 
   /* Minimal particles */
   const particles = useMemo(() =>
-    Array.from({ length: 20 }).map(() => ({
+    Array.from({ length: 10 }).map(() => ({
       left: Math.random() * 100,
       top: Math.random() * 100,
       delay: Math.random() * 5,
       duration: 10 + Math.random() * 10,
-      color: ["#FF3366", "#00D9FF", "#FFE600"][Math.floor(Math.random() * 3)],
       size: 2 + Math.random() * 2,
     }))
   , []);
@@ -55,6 +54,9 @@ const TimeCounter = () => {
       ref={sectionRef} 
       className="relative w-full bg-black text-white overflow-hidden z-10"
     >
+      {/* Top Divider Only */}
+      <div className="w-full h-1 bg-gradient-to-r from-red-600 via-purple-500 to-cyan-500" />
+
       {/* Minimal particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {particles.map((p, i) => (
@@ -66,8 +68,6 @@ const TimeCounter = () => {
               top: `${p.top}%`,
               width: `${p.size}px`,
               height: `${p.size}px`,
-              background: p.color,
-              boxShadow: `0 0 6px ${p.color}`,
               animationDelay: `${p.delay}s`,
               animationDuration: `${p.duration}s`,
             }}
@@ -75,7 +75,7 @@ const TimeCounter = () => {
         ))}
       </div>
 
-      {/* FULL WIDTH IMAGE - No border, no outline, corner to corner */}
+      {/* FULL WIDTH IMAGE - No border, no outline */}
       <motion.div 
         className="relative w-full"
         initial={{ opacity: 0 }}
@@ -106,25 +106,27 @@ const TimeCounter = () => {
                 3px 3px 0px #FF3366,
                 6px 6px 0px #00D9FF
               `,
-              WebkitTextStroke: '1px #000'
+              WebkitTextStroke: '2px #000'
             }}
           >
             HACK STARTS IN
           </h2>
         </motion.div>
 
-        {/* TIMER - Bold and Attractive */}
+        {/* TIMER - Red Dotted Background */}
         <motion.div
           className="relative w-full max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          {/* Timer Box */}
+          {/* Timer Box with Red Dotted Background */}
           <div
-            className="py-6 sm:py-8 md:py-14 px-4 rounded-xl border-4 border-black"
+            className="py-6 sm:py-8 md:py-10 px-4 rounded-xl border-4 border-black"
             style={{
-              background: "red",
+              backgroundColor: "#dc2626",
+              backgroundImage: "radial-gradient(#000 1.5px, transparent 1.5px)",
+              backgroundSize: "14px 14px",
               boxShadow: "6px 6px 0px #000",
             }}
           >
@@ -169,8 +171,8 @@ const TimeCounter = () => {
             transform: translateY(0); 
             opacity: 0; 
           }
-          10% { opacity: 0.8; }
-          90% { opacity: 0.8; }
+          10% { opacity: 0.5; }
+          90% { opacity: 0.5; }
           100% { 
             transform: translateY(-100vh); 
             opacity: 0; 
@@ -179,6 +181,8 @@ const TimeCounter = () => {
         .particle {
           position: absolute;
           border-radius: 50%;
+          background: radial-gradient(circle, #fff 0%, transparent 70%);
+          box-shadow: 0 0 4px #fff;
           animation: float linear infinite;
         }
       `}</style>

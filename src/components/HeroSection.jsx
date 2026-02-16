@@ -40,7 +40,7 @@ const fadeLeft = {
   },
 }
 
-const HeroSection = () => {
+const HeroSection = ({ onNav }) => {
   const spiderRef = useRef(null)
 
   return (
@@ -104,6 +104,8 @@ const HeroSection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              type="button"
+              onClick={() => onNav && onNav("#cta")}
               className="bg-red-600 hover:bg-red-700 transition px-6 py-3 rounded-full flex items-center gap-2 shadow-lg shadow-red-600/40"
             >
               <Sparkles size={18} />
@@ -113,6 +115,8 @@ const HeroSection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              type="button"
+              onClick={() => onNav && onNav("#roadmap")}
               className="border border-red-500 px-6 py-3 rounded-full hover:bg-red-600/20 transition flex items-center gap-2"
             >
               <Rocket size={18} />
@@ -128,11 +132,11 @@ const HeroSection = () => {
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
           className="relative flex items-center justify-center z-10 md:z-20"
         >
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center ">
             <img
               src={codepunkLogo}
               alt="CodePunk 2.0"
-              className="absolute -top-10 sm:-top-14 md:-top-[136px] w-[320px] sm:w-[420px] md:w-[560px] lg:w-[720px] max-w-[88vw] drop-shadow-[0_12px_35px_rgba(255,0,0,0.35)] pointer-events-none select-none z-0"
+              className="absolute -top-5 sm:-top-14 md:-top-[136px] w-[320px] sm:w-[420px] md:w-[560px] lg:w-[720px] max-w-[88vw] drop-shadow-[0_12px_35px_rgba(255,0,0,0.35)] pointer-events-none select-none z-0"
             />
 
             <img

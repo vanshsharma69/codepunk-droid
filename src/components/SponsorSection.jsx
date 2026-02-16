@@ -23,7 +23,7 @@ const staggerContainer = {
 
 const SponsorSection = () => {
   return (
-    <section className="relative bg-black py-28 text-white overflow-hidden">
+    <section id="sponsors" className="relative bg-black py-28 text-white overflow-hidden">
       
       {/* Subtle radial glow */}
       <div
