@@ -1,127 +1,209 @@
-import { motion } from "framer-motion";
-import pig from "../assets/pig.svg";
-import light from "../assets/light.avif";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import timelineSvg from "../assets/timeline.svg";
 
+/* ✅ Timeline Data (Required) */
 const timelineData = [
   {
-    title: "Registrations Open",
-    date: "10 March 2026",
-    desc: "Participants from across the multiverse begin assembling for the ultimate hackathon."
+    id: 1,
+    title: "1. ORIGINS",
+    description:
+      "Where it all began. The spark of an idea that would eventually grow into something extraordinary.",
+    icon: "🚀",
+    image: "/src/assets/pig.svg",
   },
   {
-    title: "Idea Submission",
-    date: "15 March 2026",
-    desc: "Pitch your breakthrough concept and prepare to disrupt reality itself."
+    id: 2,
+    title: "2. EXPANSION",
+    description:
+      "Growth and exploration. We pushed boundaries and expanded beyond what we thought possible.",
+    icon: "⚡",
+    image: "/src/assets/pig.svg",
   },
   {
-    title: "Hack Begins",
-    date: "20 March 2026",
-    desc: "48 hours of intense coding, creativity, and multiversal collaboration."
+    id: 3,
+    title: "3. INNOVATION",
+    description:
+      "Through creativity and determination, we built solutions that changed perspectives.",
+    icon: "💡",
+    image: "/src/assets/pig.svg",
   },
   {
-    title: "Final Presentation",
-    date: "22 March 2026",
-    desc: "Showcase your innovation before our elite panel of judges."
-  }
+    id: 4,
+    title: "4. RECOGNITION",
+    description:
+      "Our hard work was recognized and celebrated across industries.",
+    icon: "🏆",
+    image: "/src/assets/pig.svg",
+  },
+  {
+    id: 5,
+    title: "5. GLOBAL IMPACT",
+    description:
+      "Today, our journey continues globally, impacting thousands every day.",
+    icon: "🌍",
+    image: "/src/assets/pig.svg",
+  },
 ];
 
-export default function Timeline() {
+/* Timeline Item */
+const TimelineItem = ({ item, index, isLeft }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, margin: "-100px" });
+
   return (
-    <section className="relative w-full py-32 bg-black overflow-hidden">
-
-      {/* Big Heading 90% Width */}
-      <div className="w-[90%] mx-auto mb-24">
-        <h2 className="text-6xl md:text-8xl font-extrabold text-white uppercase tracking-wider">
-          Hackathon Timeline
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: isLeft ? -80 : 80 }}
+      animate={
+        isInView
+          ? { opacity: 1, x: 0 }
+          : { opacity: 0, x: isLeft ? -80 : 80 }
+      }
+      transition={{ duration: 0.7 }}
+      className={`flex items-center w-full mb-20 md:mb-32 ${
+        isLeft ? "flex-row" : "flex-row-reverse"
+      }`}
+    >
+      {/* Text Side */}
+      <div
+        className={`w-5/12 ${
+          isLeft ? "text-right pr-6 md:pr-12" : "text-left pl-6 md:pl-12"
+        }`}
+      >
+        <h2 className="text-2xl md:text-4xl font-bold text-white mb-3">
+          {item.title}
         </h2>
+        <p className="text-white/90 text-sm md:text-base leading-relaxed">
+          {item.description}
+        </p>
       </div>
 
-      {/* Timeline Cards */}
-      <div className="relative w-full flex flex-col items-center gap-32">
-
-        {timelineData.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className="relative w-[85%] md:w-[60%]"
-          >
-
-            {/* Reverse Isosceles Triangle Shape */}
-            <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 
-                            p-12 clip-triangle holographic-card">
-
-              {/* Light Behind Pig */}
-              <img
-                src={light}
-                alt="light"
-                className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-screen pointer-events-none"
-              />
-
-              {/* Center Pig */}
-              <div className="relative flex justify-center mb-8">
-                <img
-                  src={pig}
-                  alt="pig"
-                  className="w-20 h-20 z-10"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 text-center text-white">
-                <h3 className="text-3xl font-bold mb-2">{item.title}</h3>
-                <p className="text-pink-400 font-semibold mb-4">{item.date}</p>
-                <p className="text-gray-300">{item.desc}</p>
-              </div>
-
-            </div>
-
-          </motion.div>
-        ))}
-
+      {/* Center Dot */}
+      <div className="w-2/12 flex justify-center relative">
+        <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+          <div className="w-2 h-2 bg-[#ff1865] rounded-full" />
+        </div>
       </div>
 
-      {/* Styles */}
-      <style jsx>{`
-        .clip-triangle {
-          clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 15% 100%);
-        }
-
-        .holographic-card {
-          position: relative;
-          border-radius: 20px;
-          overflow: hidden;
-        }
-
-        .holographic-card::before {
-          content: "";
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: linear-gradient(
-            120deg,
-            rgba(255, 0, 255, 0.3),
-            rgba(0, 255, 255, 0.3),
-            rgba(255, 255, 0, 0.3)
-          );
-          transform: rotate(25deg);
-          animation: holo 6s linear infinite;
-          pointer-events: none;
-        }
-
-        @keyframes holo {
-          0% {
-            transform: translateX(-30%) rotate(25deg);
-          }
-          100% {
-            transform: translateX(30%) rotate(25deg);
-          }
-        }
-      `}</style>
-    </section>
+      {/* Image Side */}
+      <div
+        className={`w-5/12 ${
+          isLeft ? "pl-6 md:pl-12" : "pr-6 md:pr-12"
+        }`}
+      >
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-32 h-32 md:w-48 md:h-48 object-contain"
+        />
+      </div>
+    </motion.div>
   );
-}
+};
+
+/* Curved Animated Line */
+const CurvedTimeline = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  const curvePath =
+    "M 100 0 Q 100 200 100 400 Q 100 600 100 800 Q 100 1000 100 1200 Q 100 1400 100 1600";
+
+  return (
+    <div
+      ref={containerRef}
+      className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-48 h-full pointer-events-none"
+    >
+      <svg
+        className="w-full h-full"
+        viewBox="0 0 200 1600"
+        preserveAspectRatio="none"
+        fill="none"
+      >
+        <path
+          d={curvePath}
+          stroke="rgba(255,255,255,0.3)"
+          strokeWidth="2"
+          fill="none"
+        />
+        <motion.path
+          d={curvePath}
+          stroke="#ffffff"
+          strokeWidth="3"
+          fill="none"
+          strokeLinecap="round"
+          style={{ pathLength }}
+        />
+      </svg>
+    </div>
+  );
+};
+
+/* Main Timeline */
+const Timeline = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  return (
+    <div className="min-h-screen bg-[#ff1865] relative overflow-hidden">
+      {/* Header */}
+      <div className="relative z-10 flex justify-center pt-20 pb-16 px-4">
+        <h1 className="w-1/2 text-center text-5xl md:text-7xl font-bold text-white border-b-4 border-white pb-4">
+          TIMELINE
+        </h1>
+      </div>
+
+      {/* Timeline Container */}
+      <div
+        ref={containerRef}
+        className="relative max-w-6xl mx-auto px-4 pb-40"
+      >
+        <div className="hidden md:block">
+          <CurvedTimeline />
+        </div>
+
+        <div className="md:hidden absolute left-8 top-0 bottom-0 w-1">
+          <motion.div
+            className="absolute inset-0 bg-white origin-top"
+            style={{ scaleY: scrollYProgress }}
+          />
+        </div>
+
+        <div className="relative space-y-8 md:space-y-0">
+          {timelineData.map((item, index) => (
+            <TimelineItem
+              key={item.id}
+              item={item}
+              index={index}
+              isLeft={index % 2 === 0}
+            />
+          ))}
+        </div>
+
+        <div className="hidden md:flex justify-center mt-16">
+          <div className="w-4 h-4 bg-white rounded-full" />
+        </div>
+      </div>
+
+      {/* Bottom SVG Decoration */}
+      <div className="relative w-full">
+        <img
+          src={timelineSvg}
+          alt="Timeline Bottom Decoration"
+          className="w-screen max-w-none object-cover block"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Timeline;
