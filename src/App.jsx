@@ -10,6 +10,10 @@ import spiderlogo from "./assets/spider-logo.png"
 import SponsorSection from './components/SponsorSection'
 import FAQSection from './components/FAQSection'
 import ContactSection from './components/ContactUsButtons/ContactSection'
+import TimeCounter from './components/TimeCounter'
+import Timeline from './components/Timeline'
+import Prizepool from './components/PrizePool'
+import Tracks from './components/Tracks'
 
 
 function App() {
@@ -44,13 +48,21 @@ function App() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-black/45 to-black" aria-hidden />
         </div>
       )}
-      <div className={`relative z-10 mx-auto max-w-7xl px-5 pb-20 sm:px-6 lg:px-10 xl:max-w-[1400px] transition-opacity duration-700 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
+      <div className={`relative z-10 pb-20  transition-opacity duration-700 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
         <NavBar />
         <HeroSection />
         <LogoMoving image={spiderlogo} speed={25} size={120} />
+        <TimeCounter />
+        <Prizepool/>
+        <Tracks/>
+        <Timeline/>
         <SponsorSection></SponsorSection>
         <FAQSection></FAQSection>
         <ContactSection/>
+        <h1 className="font-slackey text-5xl">
+          Hackathon 2026
+        </h1>
+
 
         <Footer />
       </div>
