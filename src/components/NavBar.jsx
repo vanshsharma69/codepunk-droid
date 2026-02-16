@@ -19,7 +19,7 @@ const NavBar = () => {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="sticky top-4 z-30 mb-10"
+      className="sticky top-4 z-50 mb-10"
     >
       <div className="flex items-center justify-between rounded-full border border-white/10 bg-slate-900/70 px-5 py-3 backdrop-blur-md shadow-lg shadow-red-500/10 max-w-[1280px] mx-auto transition-colors duration-300 hover:border-red-500">
         <a href="#hero" className="group flex items-center gap-2">
@@ -68,7 +68,7 @@ const NavBar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="mt-3 rounded-2xl border border-white/10 bg-slate-900/80 p-4 backdrop-blur-md md:hidden"
+            className="fixed inset-x-4 top-24 z-50 rounded-2xl border border-white/10 bg-slate-900/95 p-4 backdrop-blur-xl shadow-2xl shadow-red-500/20 md:hidden max-h-[70vh] overflow-y-auto"
           >
             <div className="flex flex-col gap-3 text-sm font-medium text-slate-100">
               {navLinks.map((link) => (

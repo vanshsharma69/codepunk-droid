@@ -43,7 +43,10 @@ const HeroSection = () => {
   const spiderRef = useRef(null)
 
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden text-white flex items-center justify-center">
+    <section
+      id="hero"
+      className="relative min-h-screen bg-black overflow-hidden text-white flex items-center justify-center"
+    >
 
       {/* Background Glow */}
       <motion.div
@@ -122,13 +125,13 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-          className="relative flex justify-center items-center z-30"
+          className="relative flex justify-center items-center z-10 md:z-20"
         >
           <motion.img
             ref={spiderRef}
             src={spiderman}
             alt="Spider-Man"
-            className="relative h-[540px] w-[420px]"
+            className="relative h-[420px] w-[300px] sm:h-[500px] sm:w-[360px] md:h-[540px] md:w-[420px] max-w-full pointer-events-none select-none"
             style={{ zIndex: 50 }}
             animate={{
               y: [0, -15, 0],
