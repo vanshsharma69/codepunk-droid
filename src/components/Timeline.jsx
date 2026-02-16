@@ -171,7 +171,7 @@ const Timeline = () => {
           <CurvedTimeline />
         </div>
 
-        <div className="md:hidden absolute left-8 top-0 bottom-0 w-1">
+        <div className="md:hidden absolute left-1/2 top-0  bottom-0 w-1">
           <motion.div
             className="absolute inset-0 bg-white origin-top"
             style={{ scaleY: scrollYProgress }}

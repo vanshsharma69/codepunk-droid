@@ -107,8 +107,10 @@ html {
 }
 
 
+html, body {
+  height: auto;
+}
 
-
-
-
-
+html {
+  scroll-behavior: auto !important;
+}

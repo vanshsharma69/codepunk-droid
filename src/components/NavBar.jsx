@@ -21,7 +21,7 @@ const NavBar = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="sticky top-4 z-30 mb-10"
     >
-      <div className="flex items-center justify-between rounded-full border border-white/10 bg-slate-900/70 px-5 py-3 backdrop-blur-md shadow-lg shadow-red-500/10">
+      <div className="flex items-center justify-between rounded-full border border-white/10 bg-slate-900/70 px-5 py-3 backdrop-blur-md shadow-lg shadow-red-500/10 max-w-[1280px] mx-auto transition-colors duration-300 hover:border-red-500">
         <a href="#hero" className="group flex items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-red-600 to-red-500 text-white shadow-inner shadow-red-800/50">
             <img src={logo} alt="Spider-Man Logo" className="h-8 w-8 rounded-full" />
