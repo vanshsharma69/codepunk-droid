@@ -1,7 +1,8 @@
 import { useRef } from "react"
 import { motion } from "framer-motion"
 import { Sparkles, Rocket } from "lucide-react"
-import spiderman from "../assets/spiderman-center.png"
+import spiderman from "../assets/spidy.png"
+import codepunkLogo from "../assets/codepunk.png"
 
 const container = {
   hidden: {},
@@ -120,28 +121,27 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* CENTER SPIDER IMAGE */}
+        {/* CENTER LOGO + SPIDER STACK */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-          className="relative flex justify-center items-center z-10 md:z-20"
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
+          className="relative flex items-center justify-center z-10 md:z-20"
         >
-          <motion.img
-            ref={spiderRef}
-            src={spiderman}
-            alt="Spider-Man"
-            className="relative h-[420px] w-[300px] sm:h-[500px] sm:w-[360px] md:h-[540px] md:w-[420px] max-w-full pointer-events-none select-none"
-            style={{ zIndex: 50 }}
-            animate={{
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+          <div className="relative flex items-center justify-center">
+            <img
+              src={codepunkLogo}
+              alt="CodePunk 2.0"
+              className="absolute -top-10 sm:-top-14 md:-top-[136px] w-[320px] sm:w-[420px] md:w-[560px] lg:w-[720px] max-w-[88vw] drop-shadow-[0_12px_35px_rgba(255,0,0,0.35)] pointer-events-none select-none z-0"
+            />
+
+            <img
+              ref={spiderRef}
+              src={spiderman}
+              alt="Spider-Man"
+              className="relative h-[380px] w-[270px] sm:h-[470px] sm:w-[350px] md:h-[560px] md:w-[400px] max-w-full pointer-events-none select-none z-10"
+            />
+          </div>
         </motion.div>
 
         {/* RIGHT CONTENT */}
