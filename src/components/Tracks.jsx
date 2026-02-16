@@ -101,6 +101,7 @@ const Tracks = () => {
 
   return (
     <section 
+      id="tracks"
       ref={sectionRef} 
       className="relative w-full min-h-screen bg-[#0a0a0a] py-24 overflow-hidden"
     >

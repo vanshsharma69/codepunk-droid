@@ -39,7 +39,7 @@ const TimeCounter = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-black text-white overflow-hidden pb-40 border-t-2 border-white z-10">
+    <section id="stats" className="relative w-full bg-black text-white overflow-hidden pb-40 border-t-2 border-white z-10">
 
       {/* ✨ FIRE FLY PARTICLES */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">

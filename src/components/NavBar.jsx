@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Flame, Menu, Sparkles, X } from 'lucide-react'
+import { Menu, Sparkles, X } from 'lucide-react'
 import logo from '../assets/spiderman-logo.jpeg'
 
 const navLinks = [
-  { label: 'Hero', href: '#hero' },
-  { label: 'Highlights', href: '#highlights' },
+  { label: 'Prize Pool', href: '#highlights' },
+  { label: 'Tracks', href: '#tracks' },
   { label: 'Roadmap', href: '#roadmap' },
-  { label: 'Stats', href: '#stats' },
-  { label: 'Join', href: '#cta' },
+  { label: 'Sponsors', href: '#sponsors' },
+  { label: 'Contact', href: '#cta' },
 ]
 
-const NavBar = () => {
+const NavBar = ({ onNav }) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -22,7 +22,14 @@ const NavBar = () => {
       className="sticky top-4 z-50 mb-10"
     >
       <div className="flex items-center justify-between rounded-full border border-white/10 bg-slate-900/70 px-5 py-3 backdrop-blur-md shadow-lg shadow-red-500/10 max-w-[1280px] mx-auto transition-colors duration-300 hover:border-red-500">
-        <a href="#hero" className="group flex items-center gap-2">
+        <a
+          href="#hero"
+          onClick={(e) => {
+            e.preventDefault()
+            onNav && onNav('#hero')
+          }}
+          className="group flex items-center gap-2"
+        >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-red-600 to-red-500 text-white shadow-inner shadow-red-800/50">
             <img src={logo} alt="Spider-Man Logo" className="h-8 w-8 rounded-full" />
           </div>
@@ -37,6 +44,10 @@ const NavBar = () => {
             <a
               key={link.href}
               href={link.href}
+              onClick={(e) => {
+                e.preventDefault()
+                onNav && onNav(link.href)
+              }}
               className="group relative px-2 py-1 transition hover:text-red-200"
             >
               <span className="absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-red-500 via-red-300 to-blue-400 transition-transform duration-300 group-hover:scale-x-100" />
@@ -45,6 +56,10 @@ const NavBar = () => {
           ))}
           <a
             href="#cta"
+            onClick={(e) => {
+              e.preventDefault()
+              onNav && onNav("#cta")
+            }}
             className="inline-flex items-center gap-2 rounded-lg px-3 py-2 border border-red-400 hover:border-blue-400 transition-all "
           >
             <Sparkles className="h-4 w-4" />
@@ -75,7 +90,11 @@ const NavBar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    onNav && onNav(link.href)
+                    setOpen(false)
+                  }}
                   className="rounded-lg px-3 py-2 transition hover:bg-white/5 hover:text-red-200"
                 >
                   {link.label}
@@ -83,7 +102,11 @@ const NavBar = () => {
               ))}
               <a
                 href="#cta"
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault()
+                  onNav && onNav("#cta")
+                  setOpen(false)
+                }}
                 className="inline-flex items-center justify-center gap-2 rounded-xl "
               >
                 <Sparkles className="h-4 w-4" />

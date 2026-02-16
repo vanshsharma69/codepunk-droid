@@ -46,7 +46,7 @@ const PrizePool = () => {
   ];
 
   return (
-    <section className="relative w-full bg-[#070707] pt-60 overflow-hidden">
+    <section id="highlights" className="relative w-full bg-[#070707] pt-60 overflow-hidden">
 
       {/* Fireflies */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">

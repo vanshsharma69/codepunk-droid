@@ -154,7 +154,7 @@ const Timeline = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[#ff1865] relative overflow-hidden">
+    <section id="roadmap" className="min-h-screen bg-[#ff1865] relative overflow-hidden">
       {/* Header */}
       <div className="relative z-10 flex justify-center pt-20 pb-16 px-4">
         <h1 className="w-1/2 text-center text-5xl md:text-7xl font-bold text-white border-b-4 border-white pb-4">
@@ -202,7 +202,7 @@ const Timeline = () => {
           className="w-screen max-w-none object-cover block"
         />
       </div>
-    </div>
+    </section>
   );
 };
 
