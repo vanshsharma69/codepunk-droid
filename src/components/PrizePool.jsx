@@ -58,7 +58,7 @@ const PrizePool = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-black overflow-hidden">
+    <section ref={sectionRef} className="relative w-full bg-black overflow-hidden" id="prizepool">
       
       {/* Minimal particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">

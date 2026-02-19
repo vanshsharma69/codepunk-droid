@@ -4,7 +4,7 @@ import { Menu, Sparkles, X } from 'lucide-react'
 import logo from '../assets/spiderman-logo.jpeg'
 
 const navLinks = [
-  { label: 'Prize Pool', href: '#highlights' },
+  { label: 'Prize Pool', href: '#prizepool' },
   { label: 'Tracks', href: '#tracks' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Sponsors', href: '#sponsors' },

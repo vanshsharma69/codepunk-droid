@@ -154,7 +154,9 @@ function App() {
         <Timeline />
         <SponsorSection />
         <FAQSection />
-        <ContactSection />
+        <div className="max-w-[1280px] mx-auto">
+          <ContactSection />
+        </div>
 
         
 

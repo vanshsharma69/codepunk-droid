@@ -108,7 +108,7 @@ const Timeline = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#1635b7" }}>
+    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#1635b7" }} id='roadmap'>
       
       <div className="w-full h-1 bg-gradient-to-r from-red-600 via-purple-500 to-cyan-500" />
 

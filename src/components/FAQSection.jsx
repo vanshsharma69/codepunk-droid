@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+// import hang from "../assets/hang.png"
 
 const faqs = [
   {
@@ -37,7 +38,7 @@ const FAQSection = () => {
   }
 
   return (
-    <section className="bg-black text-white py-32">
+    <section className= "text-white py-32 relative bg-black overflow-hidden">
       <div className="max-w-3xl mx-auto px-6">
 
         {/* Heading */}

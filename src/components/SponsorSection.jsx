@@ -1,143 +1,99 @@
 import { motion } from "framer-motion"
+import { Mail, Phone } from "lucide-react"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-}
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 }
 
 const SponsorSection = () => {
   return (
-    <section id="sponsors" className="relative bg-black py-28 text-white overflow-hidden">
-      
-      {/* Subtle radial glow */}
+    <section
+      id="sponsors"
+      className="relative bg-black py-28 text-white overflow-hidden mt-16"
+    >
+      {/* Red Radial Glow Background */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at center, rgba(255,0,0,0.07), transparent 70%)",
+            "radial-gradient(circle at center, rgba(255,0,0,0.15), transparent 70%)",
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-6">
+      <div className="relative max-w-4xl mx-auto px-6">
 
-        {/* Heading */}
+        {/* Section Heading */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          className="text-center mb-24"
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-wide">
-            Our Sponsors
+          <h2 className="text-4xl md:text-[64px] font-bold tracking-wide" style={{
+              textShadow: `
+                4px 4px 0px #FF3366,
+                8px 8px 0px #00D9FF,
+                12px 12px 0px #FFE600
+              `,
+              WebkitTextStroke: '2px #000'
+            }} >
+            Become a Sponsor
           </h2>
-          <div className="w-16 h-[2px] bg-red-600 mx-auto mt-4" />
-          <p className="text-gray-400 mt-6 max-w-xl mx-auto">
-            Proudly supported by leading global brands driving innovation.
-          </p>
+          <div className="w-20 h-[3px] bg-red-600 mx-auto mt-4" />
         </motion.div>
 
-        {/* Title Sponsor */}
+        {/* Spider-Man Themed Sponsor Box */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mb-24"
+          className="relative bg-gradient-to-br from-black via-[#0a0a0a] to-red-950 
+                     border border-red-600/40 
+                     rounded-2xl 
+                     p-10 md:p-14 
+                     shadow-[0_0_40px_rgba(255,0,0,0.25)] 
+                     hover:shadow-[0_0_60px_rgba(255,0,0,0.4)]
+                     transition duration-500"
         >
-          <p className="text-red-500 uppercase tracking-[0.2em] text-xs mb-8">
-            Title Sponsor
-          </p>
+          {/* Web Style Top Border */}
+          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent" />
 
-          <img
-            src="https://cdn.worldvectorlogo.com/logos/google-1-1.svg"
-            alt="Title Sponsor"
-            className="h-24 md:h-32 mx-auto object-contain opacity-90 hover:opacity-100 transition duration-300 hover:scale-105"
-          />
-        </motion.div>
+          <div className="text-center space-y-8">
+            
+            <h3 className="text-2xl md:text-3xl font-semibold tracking-wide text-red-500">
+              Want to Sponsor Us?
+            </h3>
 
-        {/* Gold Sponsors */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mb-24"
-        >
-          <p className="text-red-500 uppercase tracking-[0.2em] text-xs text-center mb-12">
-            Gold Sponsors
-          </p>
+            <p className="text-gray-300 max-w-xl mx-auto">
+              Join hands with us and become part of an innovative, high-impact
+              event. Let’s build something amazing together.
+            </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-center">
-            {[
-              "https://cdn.worldvectorlogo.com/logos/microsoft-5.svg",
-              "https://cdn.worldvectorlogo.com/logos/amazon-icon-1.svg",
-              "https://cdn.worldvectorlogo.com/logos/github-icon-1.svg",
-              "https://cdn.worldvectorlogo.com/logos/meta-1.svg",
-            ].map((logo, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="flex justify-center"
-              >
-                <img
-                  src={logo}
-                  alt="Gold Sponsor"
-                  className="h-14 object-contain opacity-80 hover:opacity-100 hover:scale-105 transition duration-300"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+            {/* Contact Info */}
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8 pt-6">
 
-        {/* Silver Sponsors */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <p className="text-red-500 uppercase tracking-[0.2em] text-xs text-center mb-12">
-            Silver Sponsors
-          </p>
+              <div className="flex items-center gap-3 bg-black/60 px-6 py-3 rounded-xl border border-red-600/30 hover:border-red-600 transition">
+                <Mail className="text-red-500" size={20} />
+                <span className="text-gray-200">
+                  yourmail@example.com
+                </span>
+              </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-10 items-center">
-            {[
-              "https://cdn.worldvectorlogo.com/logos/netflix-3.svg",
-              "https://cdn.worldvectorlogo.com/logos/adobe-2.svg",
-              "https://cdn.worldvectorlogo.com/logos/tesla-9.svg",
-              "https://cdn.worldvectorlogo.com/logos/slack-new-logo.svg",
-              "https://cdn.worldvectorlogo.com/logos/stripe-4.svg",
-              "https://cdn.worldvectorlogo.com/logos/stripe-4.svg"
-            ].map((logo, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="flex justify-center"
-              >
-                <img
-                  src={logo}
-                  alt="Silver Sponsor"
-                  className="h-10 object-contain opacity-70 hover:opacity-100 transition duration-300"
-                />
-              </motion.div>
-            ))}
+              <div className="flex items-center gap-3 bg-black/60 px-6 py-3 rounded-xl border border-red-600/30 hover:border-red-600 transition">
+                <Phone className="text-red-500" size={20} />
+                <span className="text-gray-200">
+                  +91 98765 43210
+                </span>
+              </div>
+
+            </div>
           </div>
         </motion.div>
 
