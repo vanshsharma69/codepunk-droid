@@ -8,7 +8,6 @@ const PrizePool = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: "-50px" });
 
-  /* Minimal particles */
   const particles = useMemo(() =>
     Array.from({ length: 20 }).map(() => ({
       left: Math.random() * 100,
@@ -23,44 +22,29 @@ const PrizePool = () => {
     {
       id: 1,
       label: "1st Prize",
-      amount: "RS.125K+",
+      amount: "TBA",
       desc: "Grand champion award with premium goodies, cash prize and internship opportunities.",
       color: "#FFD700",
     },
     {
       id: 2,
       label: "2nd Prize",
-      amount: "RS.75K+",
+      amount: "TBA",
       desc: "Outstanding innovation award with sponsor rewards and industry mentorship.",
       color: "#C0C0C0",
     },
     {
       id: 3,
       label: "3rd Prize",
-      amount: "RS.50K+",
+      amount: "TBA",
       desc: "Creative excellence prize with project funding and exclusive merchandise.",
       color: "#CD7F32",
-    },
-    {
-      id: 4,
-      label: "4th Spark",
-      amount: "RS.25K+",
-      desc: "Recognition for disruptive ideas with incubation and sponsor support.",
-      color: "#FF3366",
-    },
-    {
-      id: 5,
-      label: "Visionary Spark",
-      amount: "RS.15K+",
-      desc: "Award for visionary thinkers with startup exposure and networking access.",
-      color: "#9D4EDD",
     }
   ];
 
   return (
     <section ref={sectionRef} className="relative w-full bg-black overflow-hidden" id="prizepool">
       
-      {/* Minimal particles */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         {particles.map((p, i) => (
           <span
@@ -79,7 +63,6 @@ const PrizePool = () => {
       </div>
 
       <div className="relative z-10 py-16">
-        {/* HEADING - Tracks Style */}
         <motion.div 
           className="text-center mb-16 px-4"
           initial={{ opacity: 0, y: 20 }}
@@ -106,31 +89,19 @@ const PrizePool = () => {
               WebkitTextStroke: '1px #000'
             }}
           >
-            RS 12 LACS+
+            TO BE ANNOUNCED
           </p>
         </motion.div>
 
-        {/* Cards Grid */}
         <div className="max-w-7xl mx-auto px-6 pb-8">
-          {/* Top Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
-            {prizes.slice(0, 3).map((prize, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10 justify-items-center">
+            {prizes.map((prize, index) => (
               <PrizeCard key={prize.id} prize={prize} index={index} isInView={isInView} />
-            ))}
-          </div>
-
-          {/* Bottom Row */}
-          <div className="flex justify-center gap-10 flex-wrap">
-            {prizes.slice(3).map((prize, index) => (
-              <div key={prize.id} className="w-full sm:w-[45%] lg:w-[30%]">
-                <PrizeCard prize={prize} index={index + 3} isInView={isInView} />
-              </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom SVG */}
       <div className="relative w-full">
         <img
           src={prizepoolImage}
@@ -139,7 +110,6 @@ const PrizePool = () => {
         />
       </div>
 
-      {/* CSS for minimal particles */}
       <style>{`
         @keyframes float {
           0%, 100% { 
@@ -165,7 +135,6 @@ const PrizePool = () => {
   );
 };
 
-/* Prize Card with White Border and Visible Description */
 const PrizeCard = ({ prize, index, isInView }) => {
   return (
     <motion.div 
@@ -174,7 +143,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
     >
-      {/* Label */}
       <div 
         className="absolute -top-4 left-1/2 -translate-x-1/2 z-20 px-5 py-2 text-black font-bold text-sm border-2 border-white"
         style={{
@@ -185,7 +153,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
         {prize.label}
       </div>
 
-      {/* Main Card */}
       <div
         className="relative rounded-2xl overflow-hidden border-4 border-white"
         style={{
@@ -193,7 +160,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
           boxShadow: "8px 8px 0px rgba(0,0,0,0.5)",
         }}
       >
-        {/* Tracks-style diagonal line texture */}
         <div 
           className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
@@ -205,9 +171,7 @@ const PrizeCard = ({ prize, index, isInView }) => {
           }}
         />
 
-        {/* Content */}
         <div className="relative z-10">
-          {/* Amount */}
           <div
             className="text-center text-4xl sm:text-5xl font-extrabold mt-8 mb-6 text-white"
             style={{
@@ -218,7 +182,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
             {prize.amount}
           </div>
 
-          {/* Light + Pig */}
           <div className="relative flex justify-center items-center h-40 mb-6">
             <img
               src={light}
@@ -232,7 +195,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
             />
           </div>
 
-          {/* Description - Purple background for visibility */}
           <div
             className="py-5 px-5 text-center text-white font-bold text-sm border-t-4 border-white"
             style={{
@@ -244,7 +206,6 @@ const PrizeCard = ({ prize, index, isInView }) => {
         </div>
       </div>
 
-      {/* CSS for slow spin */}
       <style>{`
         .animate-spin-slow {
           animation: spin 10s linear infinite;
