@@ -35,7 +35,7 @@ const NavBar = ({ onNav }) => {
           </div>
           <div className="leading-tight">
             <p className="text-xs uppercase tracking-[0.25em] text-red-200">CodePunk 2.0</p>
-            <p className="font-semibold text-slate-50">Spider-Verse Sprint</p>
+            <p className="font-semibold text-slate-50">Spider-Verse</p>
           </div>
         </a>
 
