@@ -18,7 +18,7 @@ const TimeCounter = () => {
   , []);
 
   const calculateTimeLeft = () => {
-    const targetDate = new Date("2026-03-01T00:00:00");
+    const targetDate = new Date("2026-03-24T00:00:00");
     const now = new Date();
     const diff = targetDate - now;
 
